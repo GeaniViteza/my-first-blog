@@ -6,9 +6,17 @@
             <div class="date">
                 {{ post.published_date }}
             </div>
+
+            {% else %}
+            <aside class="actions">
+                <a class="btn btn-secondary" role="button" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+            </aside>
         {% endif %}
         {% if user.is_authenticated %}
-              <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-secondary" href="{% url 'post_remove' pk=post.pk %}">
+                    {% include './icons/trash-fill.svg' %}
+                </a>
         {% endif %}
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaksbr }}</p>
